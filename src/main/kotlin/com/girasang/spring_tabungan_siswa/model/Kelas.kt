@@ -1,0 +1,17 @@
+package com.girasang.spring_tabungan_siswa.model
+
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+
+@Entity
+data class Kelas (
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long  = 0,
+    var tingkatKelas: Int = 0,
+    var namaKelas: String = "",
+    var tahunAjaran: String = ""
+
+)

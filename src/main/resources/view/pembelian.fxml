@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+      alignment="CENTER" spacing="10">
+    <Label text="Halaman Pembelian" style="-fx-font-size: 18px;"/>
+</VBox>

@@ -1,0 +1,16 @@
+spring:
+  main:
+    web-application-type: none
+  datasource:
+    url: jdbc:h2:file:./data/spring-tabungan-siswa
+    driverClassName: org.h2.Driver
+    version:
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      enabled: true
