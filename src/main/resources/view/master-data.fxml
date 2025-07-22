@@ -23,17 +23,17 @@
                   <Label layoutX="14.0" layoutY="89.0" text="Tahun Ajaran" />
                   <HBox alignment="CENTER" layoutX="14.0" layoutY="120.0" prefHeight="59.0" prefWidth="365.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <Button fx:id="btnSimpan" mnemonicParsing="false" onAction="#onSimpan" prefHeight="31.0" prefWidth="66.0" text="Simpan" />
-                        <Button fx:id="btnHapus" mnemonicParsing="false" onAction="#onHapus" prefHeight="31.0" prefWidth="66.0" text="Hapus" />
-                        <Button fx:id="btnBatal" mnemonicParsing="false" onAction="#onBatal" prefHeight="31.0" prefWidth="66.0" text="Batal" />
+                        <Button fx:id="btnSimpan" mnemonicParsing="false" onAction="#onSimpanKelas" prefHeight="31.0" prefWidth="66.0" text="Simpan" />
+                        <Button fx:id="btnHapus" mnemonicParsing="false" onAction="#onHapusKelas" prefHeight="31.0" prefWidth="66.0" text="Hapus" />
+                        <Button fx:id="btnBatal" mnemonicParsing="false" onAction="#onBatalKelas" prefHeight="31.0" prefWidth="66.0" text="Batal" />
                      </children>
                   </HBox>
-                  <TableView fx:id="tblKelas" layoutX="20.0" layoutY="207.0" onMouseClicked="#tabelClick" prefHeight="470.0" prefWidth="378.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="175.0">
+                  <TableView fx:id="tblKelas" layoutX="20.0" layoutY="207.0" onMouseClicked="#tblKelasKlik" prefHeight="470.0" prefWidth="378.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="175.0">
                     <columns>
                         <TableColumn fx:id="idKolom" prefWidth="75.0" text="id" visible="false" />
-                        <TableColumn fx:id="tahunAjaranKolom" prefWidth="93.0" text="Tahun Ajaran" />
+                        <TableColumn fx:id="kelasTahunAjaranKolom" prefWidth="93.0" text="Tahun Ajaran" />
                         <TableColumn fx:id="namaKelasKolom" minWidth="4.0" prefWidth="232.0" text="Nama Kelas" />
-                        <TableColumn fx:id="tingkatKolom" prefWidth="52.0" text="Tingkat" />
+                        <TableColumn fx:id="tingkatKolom" prefWidth="72.0" text="Tingkat" />
                     </columns>
                   </TableView>
                   <ComboBox fx:id="cboTahunAjaran" layoutX="145.0" layoutY="85.0" prefHeight="25.0" prefWidth="161.0" />
@@ -45,21 +45,21 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="613.0" prefWidth="315.0">
                <children>
-                  <TextField layoutX="121.0" layoutY="14.0" />
+                  <TextField fx:id="txtTahunAjaran" layoutX="121.0" layoutY="14.0" />
                   <Label layoutX="14.0" layoutY="18.0" text="Tahun Ajaran" />
-                  <TableView layoutX="30.0" layoutY="123.0" prefHeight="474.0" prefWidth="242.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="119.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                  </TableView>
                   <HBox alignment="CENTER" layoutY="64.0" prefHeight="59.0" prefWidth="365.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <Button fx:id="btnSimpan1" mnemonicParsing="false" onAction="#onSimpan" prefHeight="31.0" prefWidth="66.0" text="Simpan" />
-                        <Button fx:id="btnHapus1" mnemonicParsing="false" onAction="#onHapus" prefHeight="31.0" prefWidth="66.0" text="Hapus" />
-                        <Button fx:id="btnBatal1" mnemonicParsing="false" onAction="#onBatal" prefHeight="31.0" prefWidth="66.0" text="Batal" />
+                        <Button fx:id="btnSimpan1" mnemonicParsing="false" onAction="#onSimpanTahunAjaran" prefHeight="31.0" prefWidth="66.0" text="Simpan" />
+                        <Button fx:id="btnHapus1" mnemonicParsing="false" onAction="#onHapusTahunAjaran" prefHeight="31.0" prefWidth="66.0" text="Hapus" />
+                        <Button fx:id="btnBatal1" mnemonicParsing="false" onAction="#onBatalKelas" prefHeight="31.0" prefWidth="66.0" text="Batal" />
                      </children>
                   </HBox>
+                  <TableView fx:id="tblTahunAjaran" layoutX="20.0" layoutY="166.0" onMouseClicked="#tblTahunAjaranKlik" prefHeight="525.0" prefWidth="278.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <columns>
+                        <TableColumn fx:id="idTahunAjaranKolom" prefWidth="75.0" visible="false" />
+                      <TableColumn fx:id="tahunAjaranKolom" prefWidth="277.0" text="Tahun AJaran" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
         </content>
@@ -68,21 +68,21 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="613.0" prefWidth="315.0">
                <children>
-                  <TextField layoutX="121.0" layoutY="14.0" />
+                  <TextField fx:id="txtTingkatKelas" layoutX="121.0" layoutY="14.0" />
                   <Label layoutX="14.0" layoutY="18.0" text="Tingkatan Kelas" />
-                  <TableView layoutX="30.0" layoutY="123.0" prefHeight="474.0" prefWidth="242.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="119.0">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                     </columns>
-                  </TableView>
                   <HBox alignment="CENTER" layoutY="64.0" prefHeight="59.0" prefWidth="365.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <Button fx:id="btnSimpan11" mnemonicParsing="false" onAction="#onSimpan" prefHeight="31.0" prefWidth="66.0" text="Simpan" />
-                        <Button fx:id="btnHapus11" mnemonicParsing="false" onAction="#onHapus" prefHeight="31.0" prefWidth="66.0" text="Hapus" />
-                        <Button fx:id="btnBatal11" mnemonicParsing="false" onAction="#onBatal" prefHeight="31.0" prefWidth="66.0" text="Batal" />
+                        <Button fx:id="btnSimpan11" mnemonicParsing="false" onAction="#onSimpanTingkatanKelas" prefHeight="31.0" prefWidth="66.0" text="Simpan" />
+                        <Button fx:id="btnHapus11" mnemonicParsing="false" onAction="#onHapusTingkatanKelas" prefHeight="31.0" prefWidth="66.0" text="Hapus" />
+                        <Button fx:id="btnBatal11" mnemonicParsing="false" onAction="#onBatalKelas" prefHeight="31.0" prefWidth="66.0" text="Batal" />
                      </children>
                   </HBox>
+                  <TableView fx:id="tblTingkatKelas" onMouseClicked="#tblTingkatanKelasKlik" layoutX="20.0" layoutY="144.0" prefHeight="533.0" prefWidth="278.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="134.0">
+                    <columns>
+                      <TableColumn fx:id="idtTingkatKelasKolom" prefWidth="75.0" text="C1" visible="false" />
+                      <TableColumn fx:id="tingkatKelasKolom" prefWidth="277.0" text="Tingkat Kelas" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
          </content>
