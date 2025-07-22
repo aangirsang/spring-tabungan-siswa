@@ -10,7 +10,7 @@ data class Kelas (
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long  = 0,
-    var tingkatKelas: Int = 0,
+    var tingkatKelas: String = "",
     var namaKelas: String = "",
     var tahunAjaran: String = ""
 
