@@ -32,7 +32,7 @@
          <VBox prefHeight="262.0" prefWidth="245.0" spacing="20.0">
             <children>
                   <Button onAction="#onMasterData" prefHeight="25.0" prefWidth="294.0" styleClass="sidebar-button" text="Master Data" />
-                  <Button onAction="#loadKaryawan" prefHeight="25.0" prefWidth="295.0" styleClass="sidebar-button" text="Daftar Siswa" />
+                  <Button onAction="#loadDataSiswa" prefHeight="25.0" prefWidth="295.0" styleClass="sidebar-button" text="Daftar Siswa" />
                   <Button onAction="#loadPenjualan" prefHeight="25.0" prefWidth="336.0" styleClass="sidebar-button" text="Penjualan" />
                   <Button onAction="#loadPembelian" prefHeight="25.0" prefWidth="325.0" styleClass="sidebar-button" text="Pembelian" />
                   <Button onAction="#loadLainnya" prefHeight="25.0" prefWidth="304.0" styleClass="sidebar-button" text="Lainnya" />

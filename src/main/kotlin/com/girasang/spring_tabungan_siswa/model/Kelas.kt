@@ -26,6 +26,6 @@ data class Kelas (
     var namaKelas: String = "",
 
     @OneToMany(mappedBy = "kelas", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val daftarSiswa: MutableList<Siswa> = mutableListOf()
+    val daftarSiswa: MutableList<AnggotaKelas> = mutableListOf()
 
 )

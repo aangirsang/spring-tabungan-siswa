@@ -62,7 +62,7 @@ class DashboardController @Autowired constructor(
     }
 
     fun onMasterData() = loadPage("master-data")
-    fun loadKaryawan() = loadPage("daftar-siswa")
+    fun loadDataSiswa() = loadPage("siswa-daftar")
     fun loadPenjualan() = loadPage("penjualan")
     fun loadPembelian() = loadPage("pembelian")
     fun loadLainnya() = loadPage("lainnya")

@@ -23,8 +23,6 @@ data class Siswa (
     var agama: String="",
     var alamatLengkap: String="",
     var tanggalMasuk: LocalDate = LocalDate.now(),
-
-    @ManyToOne
-    @JoinColumn(name = "kelas_id")
-    var kelas: Kelas? = null
+    var status: Boolean = true,
+    var keterangan: String="",
 )
