@@ -6,20 +6,27 @@ import com.girasang.spring_tabungan_siswa.service.SiswaService
 import javafx.beans.property.ReadOnlyObjectWrapper
 import javafx.beans.property.ReadOnlyStringWrapper
 import javafx.collections.FXCollections
+import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.scene.control.Alert
+import javafx.scene.control.Button
+import javafx.scene.control.ButtonType
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
+import javafx.scene.input.MouseEvent
 import javafx.stage.Modality
 import javafx.stage.Stage
+import javafx.stage.StageStyle
 import javafx.util.Callback
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.net.URL
 import java.time.LocalDate
+import java.util.Optional
 import java.util.ResourceBundle
 
 @Component
@@ -37,6 +44,7 @@ class SiswaDaftarController @Autowired constructor(
     @FXML private lateinit var agamaKolom: TableColumn <Siswa, String>
     @FXML private lateinit var tanggalMasukKolom: TableColumn <Siswa, LocalDate>
     @FXML private lateinit var statusKolom: TableColumn <Siswa, Boolean>
+    @FXML private lateinit var btnTambah: Button
     override fun initialize(p0: URL?, p1: ResourceBundle?) {tampilData()
     }
     fun tampilData(){
@@ -51,26 +59,84 @@ class SiswaDaftarController @Autowired constructor(
         agamaKolom.setCellValueFactory{ReadOnlyStringWrapper(it.value.agama)}
         tanggalMasukKolom.setCellValueFactory{ReadOnlyObjectWrapper(it.value.tanggalMasuk)}
         statusKolom.setCellValueFactory{ReadOnlyObjectWrapper(it.value.status)}
+
+        tblSiswa.selectionModel.clearSelection()
+        btnTambah.text = "Data Baru"
     }
 
     fun tampilSiswaDialog(siswa: Siswa){
-        val loader = FXMLLoader(javaClass.getResource("/org/girsang/pos/view/jabatan.fxml"))
-        loader.controllerFactory = Callback { clazz ->
-            ApplicationContextProvider.getContext().getBean(clazz)
-        }
+        try {
+            val loader = FXMLLoader(javaClass.getResource("/view/siswa-dialog.fxml"))
+            loader.controllerFactory = Callback { clazz ->
+                ApplicationContextProvider.getContext().getBean(clazz)
+            }
 
-        val root = loader.load<Parent>()
-        val stage = Stage()
-        stage.title = "Jabatan"
-        stage.scene = Scene(root)
-        stage.initModality(Modality.APPLICATION_MODAL)
-        stage.showAndWait()
+            val root = loader.load<Parent>()
+
+            val controller = loader.getController<SiswaDialogController>()
+            controller.setSiswa(siswa)
+
+            val stage = Stage()
+            stage.scene = Scene(root)
+            stage.initStyle(StageStyle.UNDECORATED)
+            stage.initModality(Modality.WINDOW_MODAL)
+            stage.initOwner(btnTambah.scene.window)
+            stage.isResizable = false
+
+            stage.setOnCloseRequest { it.consume() }
+            stage.showAndWait()
+            println("Ditutup")
+            tampilData()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+    fun tampilKonfirmasi(message: String): Boolean {
+        val alert = Alert(Alert.AlertType.CONFIRMATION)
+        alert.title = "Konfirmasi"
+        alert.headerText = null
+        alert.contentText = message
+
+        val result: Optional<ButtonType> = alert.showAndWait()
+        return result.isPresent && result.get() == ButtonType.OK
     }
 
-    fun onData(){
+    @FXML fun onData(event: ActionEvent){
         val selected = tblSiswa.selectionModel.selectedItem
-        if (selected==null){
-            val siswa : Siswa
+        var siswa : Siswa
+        if(selected ==null ){
+            siswa = Siswa()
+            tampilSiswaDialog(siswa)
+        } else{
+            tampilSiswaDialog(selected)
+        }
+    }
+    fun onHapus(){
+        val selected = tblSiswa.selectionModel.selectedItem
+        if(selected!=null){
+            val konfirmasi = tampilKonfirmasi("Apakah Anda yakin ingin menghapus data ini?")
+            if(konfirmasi){
+                siswaService.hapus(selected.id)
+                tampilData()
+            }
+        }
+    }
+    fun onRefresh(){
+        tampilData()
+    }
+    fun tblSiswaKlik(event: MouseEvent){
+        if(event.clickCount==1){
+            val selected = tblSiswa.selectionModel.selectedItem
+            if(selected != null){
+                btnTambah.text = "Ubah Data"
+            }
+        }
+        if(event.clickCount==2){
+            val selected = tblSiswa.selectionModel.selectedItem
+            if(selected != null){
+                val siswa = siswaService.cariId(selected.id)
+                tampilSiswaDialog(selected)
+            }
         }
     }
 }

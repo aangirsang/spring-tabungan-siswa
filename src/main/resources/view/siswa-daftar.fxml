@@ -15,9 +15,9 @@
    <children>
       <HBox alignment="CENTER_LEFT" layoutY="50.0" prefHeight="100.0" prefWidth="1077.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onData" prefHeight="65.0" prefWidth="102.0" text="Data Baru" />
-            <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="102.0" text="Hapus" />
-            <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="102.0" text="Refresh" />
+            <Button fx:id="btnTambah" mnemonicParsing="false" onAction="#onData" prefHeight="65.0" prefWidth="102.0" text="Data Baru" />
+            <Button fx:id="btnHapus" mnemonicParsing="false" onAction="#onHapus" prefHeight="65.0" prefWidth="102.0" text="Hapus" />
+            <Button fx:id="btnRefresh" mnemonicParsing="false" onAction="#onRefresh"  prefHeight="65.0" prefWidth="102.0" text="Refresh" />
             <Pane prefHeight="100.0" prefWidth="290.0" HBox.hgrow="ALWAYS" />
             <TextField prefHeight="25.0" prefWidth="327.0" promptText="Cari Nama Siswa" />
          </children>
@@ -25,7 +25,7 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </HBox>
-      <TableView fx:id="tblSiswa" layoutX="14.0" layoutY="100.0" prefHeight="812.0" prefWidth="1061.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="160.0">
+      <TableView fx:id="tblSiswa" layoutX="14.0" layoutY="100.0" onMouseClicked="#tblSiswaKlik" prefHeight="812.0" prefWidth="1061.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="160.0">
         <columns>
           <TableColumn fx:id="idKolom" prefWidth="75.0" text="id" visible="false" />
           <TableColumn fx:id="nisnKolom" prefWidth="75.0" text="NISN" />
