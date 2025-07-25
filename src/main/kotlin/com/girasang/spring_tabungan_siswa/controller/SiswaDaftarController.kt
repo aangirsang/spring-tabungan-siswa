@@ -24,6 +24,7 @@ import javafx.stage.StageStyle
 import javafx.util.Callback
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.io.File
 import java.net.URL
 import java.time.LocalDate
 import java.util.Optional
@@ -45,6 +46,8 @@ class SiswaDaftarController @Autowired constructor(
     @FXML private lateinit var tanggalMasukKolom: TableColumn <Siswa, LocalDate>
     @FXML private lateinit var statusKolom: TableColumn <Siswa, Boolean>
     @FXML private lateinit var btnTambah: Button
+
+    val pathGambar = "images"
     override fun initialize(p0: URL?, p1: ResourceBundle?) {tampilData()
     }
     fun tampilData(){
@@ -117,6 +120,7 @@ class SiswaDaftarController @Autowired constructor(
             val konfirmasi = tampilKonfirmasi("Apakah Anda yakin ingin menghapus data ini?")
             if(konfirmasi){
                 siswaService.hapus(selected.id)
+                hapusGambarSiswa(selected.id)
                 tampilData()
             }
         }
@@ -139,4 +143,35 @@ class SiswaDaftarController @Autowired constructor(
             }
         }
     }
+    fun hapusGambarSiswa(siswaId: Long) {
+        val folder = File(pathGambar)
+        println("Cek folder: ${folder.absolutePath}")
+
+        if (!folder.exists()) {
+            println("Folder tidak ditemukan.")
+            return
+        }
+
+        val files = folder.listFiles()
+        if (files.isNullOrEmpty()) {
+            println("Folder kosong atau tidak bisa diakses.")
+            return
+        }
+
+        val fileFoto = files.firstOrNull {
+            it.nameWithoutExtension == siswaId.toString()
+        }
+
+        if (fileFoto == null) {
+            println("Gambar siswa $siswaId tidak ditemukan di folder.")
+        } else {
+            if (fileFoto.exists()) {
+                fileFoto.setWritable(true)
+                fileFoto.setReadable(true)
+                val deleted = fileFoto.delete()
+                println("File ${fileFoto.name} dihapus paksa: $deleted")
+            }
+        }
+    }
+
 }
